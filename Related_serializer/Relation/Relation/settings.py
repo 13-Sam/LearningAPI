@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(q@lbk!u-uhpx^!p2krs5kbnwg@8$0tg3dixgs=!(q0*7i4nwx'
+SECRET_KEY = 'django-insecure-vxi_0muuslps%ln35kgil9erety34(7wzi!!)z#md9nm2+)-*^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -20,14 +20,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'myAPI',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myAPI',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -40,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'l2.urls'
+ROOT_URLCONF = 'Relation.urls'
 
 TEMPLATES = [
     {
@@ -58,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'l2.wsgi.application'
+WSGI_APPLICATION = 'Relation.wsgi.application'
 
 
 # Database
@@ -112,11 +112,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
-        'rest_framework_xml.renderers.XMLRenderer',
-    ]
-}
