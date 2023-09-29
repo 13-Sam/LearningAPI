@@ -5,15 +5,26 @@ from rest_framework import status
 from . models import Category, MenuItem
 from . serializers import CategorySerializer, MenuItemSerializer
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage
 # Create your views here.
 @api_view(['GET', 'POST'])
 def menuItems(request):
     if request.method == 'GET':
         items = MenuItem.objects.all()
         search = request.query_params.get('search')
+        ordering = request.query_params.get('ordering')
+        perpage = request.query_params.get('perpage', default = 2)
+        page = request.query_params.get('page', default = 1)
         if search:
             items = items.filter(Q(name__icontains = search)|
                                  Q(category__title = search))
+        if ordering:
+            items = items.order_by(ordering)
+        paginator = Paginator(items, per_page=perpage)
+        try:
+            items = paginator.page(number = page)
+        except EmptyPage:
+            items = []
         serializer_items = MenuItemSerializer(items, many=True)
         return Response({'data': serializer_items.data}, status=status.HTTP_200_OK)
     if request.method == 'POST':
