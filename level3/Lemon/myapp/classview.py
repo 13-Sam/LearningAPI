@@ -2,9 +2,11 @@ from rest_framework.response import Response
 from . models import Category, MenuItem
 from . serializers import CategorySerializer, MenuItemSerializer
 from rest_framework import viewsets, generics
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 
 class MenuItemView(viewsets.ModelViewSet, generics.DestroyAPIView):
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     ordering_fields=['price','inventory']
