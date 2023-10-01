@@ -17,6 +17,7 @@ urlpatterns = [
     path('manager-view/', views.manager_view),
     path('anon-throttle', views.anon_throttle),
     path('api-token-auth/', obtain_auth_token),
+    path('groups/manager/users', views.manager),
     
     
     
